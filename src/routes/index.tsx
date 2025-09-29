@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <Categories />,
   },
   {
-    path: "*", // 👈 wildcard route
+    path: "*",
     element: <NotFound />,
   },
   //   {
