@@ -9,7 +9,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-7xl px-4">
       <div
-        className="bg-background/70 backdrop-blur-xl border border-white/20 
+        className="bg-background/70 backdrop-blur-xl border-b-2 border-t-2 border-white/20 
                    rounded-full shadow-lg shadow-black/10 px-6 sm:px-8"
       >
         <div className="flex justify-between items-center h-14">
