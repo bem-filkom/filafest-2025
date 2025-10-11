@@ -4,8 +4,7 @@ import { Navbar } from "@/components/share/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CATEGORIES } from "@/constant/categories";
-import { Check, Drama } from "lucide-react";
-import maskotVote from "@/assets/maskots/vote.png";
+import { Drama } from "lucide-react";
 
 export default function Awarding() {
   return (
@@ -46,6 +45,7 @@ export default function Awarding() {
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
                   {items.map((cat, idx) => (
                     <Card
+                      key={idx}
                       className="group select-none relative cursor-pointer rounded-2xl border border-border bg-card/60 backdrop-blur-sm
                          shadow-sm hover:shadow-lg transition-transform transform
                          duration-300"
