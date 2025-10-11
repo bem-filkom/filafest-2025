@@ -1,16 +1,34 @@
 import { Footer } from "@/components/share/Footer";
 import { Navbar } from "@/components/share/Navbar";
 import { Badge } from "@/components/ui/badge";
-import maskotVote from "@/assets/maskots/vote.png";
 import { Card, CardContent } from "@/components/ui/card";
 import AlertVote from "@/components/candidates/AlertVote";
 import { motion } from "framer-motion";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 export default function Candidates() {
   return (
     <main className="min-h-screen">
       <Navbar />
+
       <motion.header initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative pt-32 pb-16">
+        <div className="max-w-6xl mx-auto mb-10">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/categories">Kategori</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Best Inspiring Lecture</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Badge className="mb-5">Nominasi</Badge>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight !font-serif italic">Best Inspiring Lecturer</h1>
@@ -24,7 +42,7 @@ export default function Candidates() {
             <motion.div key={index} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}>
               <Card>
                 <CardContent>
-                  <img src={maskotVote} className="aspect-square border mb-2 rounded-lg object-cover w-full" />
+                  <img src={"https://umj.ac.id/storage/2024/10/parb.jpg"} className="aspect-square border mb-2 rounded-lg object-cover w-full" />
                   <h1 className="mb-2 text-sm italic font-semibold">Ir. Bp. Numerouno S.Kom. P.hd</h1>
                   <AlertVote />
                 </CardContent>

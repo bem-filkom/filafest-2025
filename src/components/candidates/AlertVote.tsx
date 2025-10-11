@@ -10,12 +10,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
+import { Vote } from "lucide-react";
 
 export default function AlertVote() {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="w-full">
-        <Button className="w-full">Vote</Button>
+        <Button className="w-full">
+          Vote <Vote />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
