@@ -19,12 +19,12 @@ export default function Candidates() {
       </motion.header>
 
       <main className="max-w-6xl mx-auto mb-20 px-6">
-        <div className="grid grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {Array.from({ length: 10 }).map((_, index) => (
             <motion.div key={index} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}>
               <Card>
                 <CardContent>
-                  <img src={maskotVote} className="aspect-square border mb-2 rounded-lg object-cover" />
+                  <img src={maskotVote} className="aspect-square border mb-2 rounded-lg object-cover w-full" />
                   <h1 className="mb-2 text-sm italic font-semibold">Ir. Bp. Numerouno S.Kom. P.hd</h1>
                   <AlertVote />
                 </CardContent>
