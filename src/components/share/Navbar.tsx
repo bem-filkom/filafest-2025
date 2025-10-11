@@ -21,14 +21,14 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6">
+            <div className="ml-10 flex items-center space-x-6 [&>a]:select-none">
               <a href="/" className="nav-link">
                 Home
               </a>
               <a href="/categories" className="nav-link">
                 Nominasi
               </a>
-              <a href="/" className="nav-link">
+              <a href="/awarding" className="nav-link">
                 Awarding
               </a>
               <a href="/login">

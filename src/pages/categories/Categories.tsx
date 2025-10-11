@@ -1,50 +1,70 @@
 import { Footer } from "@/components/share/Footer";
+import LightRays from "@/components/share/LightRays";
 import { Navbar } from "@/components/share/Navbar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-const CATEGORIES = [
-  { title: "Student of the Year", desc: "Penghargaan bagi mahasiswa dengan prestasi akademik maupun non-akademik terbaik." },
-  { title: "Best of Innovation", desc: "Apresiasi untuk ide inovatif yang memberikan dampak positif." },
-  { title: "Best of Startup", desc: "Kategori untuk startup terbaik yang dikembangkan oleh mahasiswa." },
-  { title: "Best of Community Engagement", desc: "Penghargaan untuk kontribusi mahasiswa dalam kegiatan sosial dan masyarakat." },
-  { title: "Best of Technology", desc: "Kategori untuk pencapaian luar biasa di bidang teknologi." },
-  { title: "Best of Creativity", desc: "Apresiasi karya seni, desain, dan bentuk kreativitas lainnya." },
-  { title: "Best of Leadership", desc: "Diberikan kepada mahasiswa dengan kemampuan kepemimpinan yang inspiratif." },
-  { title: "Best of Research", desc: "Kategori untuk penelitian terbaik dengan kontribusi nyata." },
-  { title: "Best of Collaboration", desc: "Apresiasi untuk kerja sama tim dan kolaborasi yang berdampak." },
-  { title: "Best of Spirit", desc: "Penghargaan bagi mahasiswa yang memberikan semangat positif bagi lingkungan sekitar." },
-];
+import { Badge } from "@/components/ui/badge";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { CATEGORIES } from "@/constant/categories";
+import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Categories() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="z-10 bg-background text-foreground">
       <Navbar />
 
-      {/* Hero */}
-      <header className="relative pt-32 pb-16">
+      <div className="absolute inset-0 z-0">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#FFF"
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={8}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.3}
+          distortion={0.05}
+          className="custom-rays"
+        />
+      </div>
+
+      <motion.header initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Kategori Nominasi</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight !font-serif italic">Kategori Nominasi</h1>
           <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">Kategori penghargaan dalam FILAFEST tahun ini.</p>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Grid */}
       <main className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {CATEGORIES.map((cat, idx) => (
-            <Card
-              key={idx}
-              className="group rounded-2xl border border-border bg-card/60 backdrop-blur-sm
+        <div className="space-y-20">
+          {Object.entries(CATEGORIES).map(([name, items], groupIdx) => (
+            <div key={groupIdx}>
+              <motion.div initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: groupIdx * 0.2 }}>
+                <Card className="mb-5 bg-yellow-50/10">
+                  <CardHeader>
+                    <CardTitle>{name}</CardTitle>
+                  </CardHeader>
+                </Card>
+              </motion.div>
+
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((cat, idx) => (
+                  <motion.a href="/categories/hello" key={idx} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.1 }}>
+                    <Card
+                      className="group select-none relative cursor-pointer rounded-2xl border border-border bg-card/60 backdrop-blur-sm
                          shadow-sm hover:shadow-lg transition-transform transform
-                          duration-300"
-            >
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{cat.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{cat.desc}</p>
-              </CardContent>
-            </Card>
+                         duration-300"
+                    >
+                      <Badge className="absolute top-0 right-0 bg-green-800">
+                        <Check /> Sudah Vote
+                      </Badge>
+                      <CardHeader>
+                        <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{cat}</CardTitle>
+                      </CardHeader>
+                    </Card>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </main>

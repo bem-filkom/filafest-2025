@@ -74,7 +74,7 @@ export function HeroSection({ ...props }: HeroSectionProps) {
         </motion.div>
 
         {/* Main Title */}
-        <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 tracking-tight">
+        <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl !font-serif italic font-extrabold text-foreground mb-6 tracking-tight">
           FILKOM Awarding Festival
         </motion.h1>
 
