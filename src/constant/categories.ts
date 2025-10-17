@@ -3,8 +3,8 @@ export const CATEGORIES = {
   LO: ["Best of Innovative LO", "Best of Talent Development", "Best of Collaboration", "Best of Social Media Management", "Most Favorite", "Best of Company Profile", "Best Of Management"],
   LSO: ["Best of Talent Achievement", "Most Impactful LSO", "Best of Creative Media", "Most Favorite", "Best of Creative Movement", "Best of Collaboration"],
   Komunitas: ["Most Growth Community", "Most Active Community"],
-  ProgramKerja: ["Best Soft Skill Development Program", "Best of Social Impact Program", "Best of Competition Program", "Most Favorite", "Best Hard Skill Development Program"],
+  "Program Kerja": ["Best Soft Skill Development Program", "Best of Social Impact Program", "Best of Competition Program", "Most Favorite", "Best Hard Skill Development Program"],
   Individual: ["Best of Leader", "Best of Program Leader"],
   Unit: ["Most of Impactful", "Most of Contributive"],
-  TataUsaha: ["Best of Service"],
+  "Tata Usaha": ["Best of Service"],
 };

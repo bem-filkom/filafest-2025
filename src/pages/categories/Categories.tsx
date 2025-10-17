@@ -48,14 +48,14 @@ export default function Categories() {
         </div>
       </motion.header>
 
-      <main className="max-w-6xl mx-auto px-6 pb-20">
+      <main className="max-w-6xl relative z-10 mx-auto px-6 pb-20">
         <div className="space-y-20">
           {Object.entries(CATEGORIES).map(([name, items], groupIdx) => (
             <div key={groupIdx}>
               <motion.div initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: groupIdx * 0.2 }}>
-                <Card className="mb-5 bg-yellow-50/10">
+                <Card className="mb-5 bg-orange-600">
                   <CardHeader>
-                    <CardTitle>{name}</CardTitle>
+                    <CardTitle className="uppercase font-bold">{name}</CardTitle>
                   </CardHeader>
                 </Card>
               </motion.div>

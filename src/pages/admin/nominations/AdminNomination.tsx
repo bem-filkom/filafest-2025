@@ -30,7 +30,7 @@ export default function AdminNominations() {
                 </div>
                 <div className="overflow-y-auto space-y-2 flex-1 pr-2">
                   {Array.from({ length: 8 }).map((_, index) => (
-                    <Card key={index} className="cursor-pointer border-b border-slate-700">
+                    <Card key={index} className="cursor-pointer bg-blue-600/10">
                       <CardContent className="">
                         <div className="flex justify-between items-center">
                           <p>Hello</p>
@@ -61,11 +61,11 @@ export default function AdminNominations() {
                 </div>
                 <div className="space-y-2">
                   <Label>Judul</Label>
-                  <Input className="border-border outline" placeholder="" />
+                  <Input className="border-border outline" placeholder="Masukkan judul nya pras!" />
                 </div>
                 <div className="space-y-2">
                   <Label>Deskripsi</Label>
-                  <Input className="border-border outline" placeholder="" />
+                  <Input className="border-border outline" placeholder="Deskripsinya jangan lupa, pras!" />
                 </div>
                 <div className="flex gap-2">
                   <AlertDelete />

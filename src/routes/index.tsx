@@ -1,5 +1,6 @@
 import MainLayout from "@/components/share/MainLayout";
 import Admin from "@/pages/admin/Admin";
+import AdminCandidates from "@/pages/admin/candidates/AdminCandidates";
 import AdminCategories from "@/pages/admin/categories/AdminCategories";
 import AdminNominations from "@/pages/admin/nominations/AdminNomination";
 import Login from "@/pages/auth/Login";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/nominations",
     element: <AdminNominations />,
+  },
+  {
+    path: "/admin/candidates",
+    element: <AdminCandidates />,
   },
   {
     path: "*",

@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CATEGORIES } from "@/constant/categories";
 import { Drama } from "lucide-react";
 
+import mask from "@/assets/mask.webp";
+
 export default function Awarding() {
   return (
     <main className="min-h-screen">
@@ -52,9 +54,9 @@ export default function Awarding() {
                     >
                       <CardContent>
                         <div className="aspect-square border mb-2 rounded-lg object-cover flex justify-center items-center">
-                          <Drama size={100} className="opacity-90" />
+                          {/* <Drama size={100} className="opacity-90" /> */}
+                          <img src={mask} className="w-24 h-2/4 " />
                         </div>
-                        {/* <img src={maskotVote} className="" /> */}
                         {/* <h1 className="mb-2 text-sm italic font-semibold">Ir. Bp. Numerouno S.Kom. P.hd</h1> */}
                         <Badge variant={"secondary"} className="mb-2">
                           Who's the next?

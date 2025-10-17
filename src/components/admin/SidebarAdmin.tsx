@@ -9,17 +9,13 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { LayoutDashboard, LogOut, ScrollText, User2Icon } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function SidebarAdmin({ children }: { children: React.ReactNode }) {
   const items = [
-    {
-      title: "Dashboard",
-      url: "/admin",
-      icon: LayoutDashboard,
-    },
     {
       title: "Kategori",
       url: "/admin/categories",
@@ -31,7 +27,7 @@ export default function SidebarAdmin({ children }: { children: React.ReactNode }
       icon: ScrollText,
     },
     {
-      title: "Candidates",
+      title: "Kandidat",
       url: "/admin/candidates",
       icon: User2Icon,
     },
@@ -39,9 +35,25 @@ export default function SidebarAdmin({ children }: { children: React.ReactNode }
   return (
     <SidebarProvider>
       <Sidebar>
+        <SidebarHeader className="font-bold border-b border-border">FILAFEST ADMIN</SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Menu</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <a href={"/admin"}>
+                      <LayoutDashboard />
+                      <span>Dashboard</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel>Kelola</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {items.map((item) => (

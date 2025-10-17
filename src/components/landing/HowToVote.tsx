@@ -4,6 +4,7 @@ import maskotPilih from "@/assets/maskots/pilih.png";
 import maskotRegistrasiAkun from "@/assets/maskots/registrasi-akun.png";
 import maskotTungguHasil from "@/assets/maskots/tunggu-hasil.png";
 import maskotVote from "@/assets/maskots/vote.png";
+import { Badge } from "../ui/badge";
 
 export function HowToVoteSection() {
   const steps = [
@@ -43,7 +44,8 @@ export function HowToVoteSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all duration-300">
+            <Card key={index} className="relative bg-card border-border hover:border-primary/50 transition-all duration-300">
+              <Badge className="absolute top-0 right-0 bg-blue-900">Step {index + 1}</Badge>
               <CardHeader className="text-center">
                 <img src={step.maskot} alt="" />
 

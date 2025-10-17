@@ -15,9 +15,9 @@ import { Vote } from "lucide-react";
 export default function AlertVote() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full">
+      <AlertDialogTrigger className="">
         <Button className="w-full">
-          Vote <Vote />
+          Pilih kandidat <Vote />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
