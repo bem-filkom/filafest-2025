@@ -35,7 +35,7 @@ export default function SidebarAdmin({ children }: { children: React.ReactNode }
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarHeader className="font-bold border-b border-border">FILAFEST ADMIN</SidebarHeader>
+        <SidebarHeader className="font-bold border-b border-border">FILAFEST ATMIN</SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Menu</SidebarGroupLabel>

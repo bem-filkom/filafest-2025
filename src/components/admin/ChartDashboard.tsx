@@ -4,6 +4,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { motion } from "framer-motion";
 import maskotVote from "@/assets/maskots/vote.png";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { ArrowUpRightIcon } from "lucide-react";
 
 const chartData = [
   { label: "Profile A", name: "John Doe", value: 275 },
@@ -18,7 +20,7 @@ export default function ChartDashboard() {
 
   return (
     <Card className="">
-      <CardHeader>
+      <CardHeader className="border-border border-b">
         <CardDescription className="mb-2">
           <Badge>Dosen</Badge>
         </CardDescription>
@@ -55,6 +57,11 @@ export default function ChartDashboard() {
             </div>
           );
         })}
+        <div className="flex justify-end py-0 my-0">
+          <Button className="text-xs" variant={"link"}>
+            Selengkapnya <ArrowUpRightIcon />
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
