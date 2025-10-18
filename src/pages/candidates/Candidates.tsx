@@ -2,7 +2,6 @@ import { Footer } from "@/components/share/Footer";
 import { Navbar } from "@/components/share/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import AlertVote from "@/components/candidates/AlertVote";
 import { motion } from "framer-motion";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";

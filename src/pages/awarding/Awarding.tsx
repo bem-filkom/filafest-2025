@@ -4,7 +4,6 @@ import { Navbar } from "@/components/share/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CATEGORIES } from "@/constant/categories";
-import { Drama } from "lucide-react";
 
 import mask from "@/assets/mask.webp";
 
@@ -36,12 +35,12 @@ export default function Awarding() {
           </div>
         </header>
         <main className="max-w-6xl mx-auto px-6 pb-20">
-          <div className="space-y-20">
+          <div className="space-y-20 relative">
             {Object.entries(CATEGORIES).map(([name, items]) => (
               <div>
-                <Card className="mb-5 bg-yellow-50/10 ">
+                <Card className="mb-5 bg-orange-600">
                   <CardHeader>
-                    <CardTitle>{name}</CardTitle>
+                    <CardTitle className="uppercase font-bold">{name}</CardTitle>
                   </CardHeader>
                 </Card>
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

@@ -63,17 +63,15 @@ export default function Categories() {
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((cat, idx) => (
                   <motion.a href="/categories/hello" key={idx} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.1 }}>
-                    <Card
-                      className="group select-none relative cursor-pointer rounded-2xl border border-border bg-card/60 backdrop-blur-sm
-                         shadow-sm hover:shadow-lg transition-transform transform
-                         duration-300"
-                    >
-                      <Badge className="absolute top-0 right-0 bg-green-800">
-                        <Check /> Sudah Vote
-                      </Badge>
-                      <CardHeader>
-                        <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{cat}</CardTitle>
-                      </CardHeader>
+                    <Card className="group border-animate select-none cursor-pointer rounded-2xl shadow-sm transition-all duration-300 hover:outline hover:outline-orange-500">
+                      <div className="overflow-hidden rounded-2xl">
+                        <Badge className="absolute top-0 right-0 bg-green-800">
+                          <Check /> Sudah Vote
+                        </Badge>
+                        <CardHeader>
+                          <CardTitle className="text-lg font-semibold text-foreground transition-colors">{cat}</CardTitle>
+                        </CardHeader>
+                      </div>
                     </Card>
                   </motion.a>
                 ))}

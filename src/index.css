@@ -16,6 +16,59 @@
   @apply block text-foreground/80 hover:text-primary px-3 py-2 text-base font-medium transition-colors duration-200 rounded-lg;
 }
 
+/* Tetap diperlukan untuk animasi rotasi */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@theme {
+  @keyframes border-rotation {
+    to {
+      --border-angle: 360deg;
+    }
+  }
+}
+
+/* Penampung utama */
+.border-animate {
+  position: relative; /* Diperlukan agar ::before bisa diposisikan */
+  background-clip: padding-box; /* Pastikan background hanya untuk isi */
+  border: 1px solid transparent; /* Beri ruang untuk border */
+}
+
+/* Lapisan untuk gradien border animasi */
+.border-animate::before {
+  content: "";
+  position: absolute;
+  inset: -3px; /* Mengisi seluruh area termasuk border */
+  z-index: -1; /* Letakkan di belakang konten kartu */
+  border-radius: inherit; /* Ikuti lengkungan sudut parent */
+
+  /* Gradien border diletakkan di sini */
+  background-image: conic-gradient(
+    from var(--border-angle),
+    rgba(71, 85, 105, 0.48) 80%,
+    oklch(70.5% 0.213 47.604) 86%,
+    oklch(85% 0.213 47.604) 90%,
+    oklch(70.5% 0.213 47.604) 94%,
+    rgba(71, 85, 105, 0.48)
+  );
+
+  /* Awalnya disembunyikan dan siap untuk transisi */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Saat kartu di-hover */
+.border-animate:hover::before {
+  /* Munculkan gradien border dengan smooth */
+  opacity: 1;
+  /* Jalankan animasi rotasi hanya saat hover */
+  animation: border-rotation 1.2s linear infinite;
+}
+
 :root {
   /* Updated color tokens for FILAFEST dark theme */
   --background: oklch(0.145 0 0); /* Dark gray background */

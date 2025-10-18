@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import LightRays from "../share/LightRays";
 import { ArrowUpRight } from "lucide-react";
-import bgImage from "@/assets/logo-filafest.webp";
+import MarqueeImage from "../share/MarqueeImage";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement>;
 
@@ -28,26 +28,6 @@ const itemVariants: MotionProps["variants"] = {
 export function HeroSection({ ...props }: HeroSectionProps) {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden" {...props}>
-      {/* Floating Background Image */}
-      <motion.img
-        src={bgImage as string}
-        alt="Background logo"
-        className="absolute h-72 w-72 opacity-10"
-        initial={{ opacity: 0, scale: 0.85, rotate: -5 }}
-        animate={{
-          opacity: 0.1,
-          y: [15, -15, 15],
-          scale: [0.95, 1.02, 0.95],
-          rotate: [-2, 2, -2],
-        }}
-        transition={{
-          y: { duration: 10, repeat: Infinity, ease: "easeInOut" },
-          scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
-          rotate: { duration: 16, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 2, ease: "easeOut" },
-        }}
-      />
-
       {/* Overlay Layers */}
       <motion.div className="absolute inset-0 bg-black/70 z-0" initial={{ opacity: 0 }} animate={{ opacity: 0.7 }} transition={{ duration: 1.5 }} />
       <div className="absolute inset-0 z-0">
@@ -70,7 +50,7 @@ export function HeroSection({ ...props }: HeroSectionProps) {
       <motion.div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto" variants={containerVariants} initial="hidden" animate="show">
         {/* Welcome Badge */}
         <motion.div variants={itemVariants}>
-          <Badge className="mb-6 text-sm bg-slate-800/30 backdrop-blur-md border px-4 py-2 shadow-sm">FILAFEST</Badge>
+          <Badge className="mb-6 text-sm bg-orange-600 font-bold backdrop-blur-md border px-4 py-2 shadow-sm">FILAFEST</Badge>
         </motion.div>
 
         {/* Main Title */}
@@ -86,13 +66,17 @@ export function HeroSection({ ...props }: HeroSectionProps) {
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <motion.div whileTap={{ scale: 0.95 }}>
-            <Button size="lg" className="!px-12 py-3 rounded-full text-base font-medium shadow-lg">
+            <Button size="lg" className="!px-12 py-3 rounded-full text-base font-medium shadow-lg bg-gradient-to-r from-[#241084] via-[#00309B] to-[#1581FF]">
               Vote Now!
               <ArrowUpRight className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>
         </motion.div>
       </motion.div>
+      <div className="bg-gradient-to-tl from-orange-600/20 absolute h-full w-full"></div>
+      <div className="absolute right-0 left-0 opacity-20">
+        <MarqueeImage />
+      </div>
     </section>
   );
 }
