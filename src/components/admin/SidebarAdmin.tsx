@@ -11,10 +11,13 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, LogOut, ScrollText, User2Icon } from "lucide-react";
+import { LayoutDashboard, LogOut, PlusCircle, ScrollText, User2Icon } from "lucide-react";
 import { Button } from "../ui/button";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function SidebarAdmin({ children }: { children: React.ReactNode }) {
+  const { logout } = useAuth();
+
   const items = [
     {
       title: "Kategori",
@@ -69,9 +72,24 @@ export default function SidebarAdmin({ children }: { children: React.ReactNode }
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel>Nomine</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <a href={"/admin/nominee"}>
+                      <PlusCircle />
+                      <span>Add Nominee</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
         <SidebarFooter className="mb-10">
-          <Button>
+          <Button onClick={() => logout()}>
             Keluar <LogOut />
           </Button>
         </SidebarFooter>

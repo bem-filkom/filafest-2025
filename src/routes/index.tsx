@@ -3,6 +3,7 @@ import Admin from "@/pages/admin/Admin";
 import AdminCandidates from "@/pages/admin/candidates/AdminCandidates";
 import AdminCategories from "@/pages/admin/categories/AdminCategories";
 import AdminNominations from "@/pages/admin/nominations/AdminNomination";
+import AdminNominee from "@/pages/admin/nominee/AdminNominee";
 import Login from "@/pages/auth/Login";
 import Awarding from "@/pages/awarding/Awarding";
 import Candidates from "@/pages/candidates/Candidates";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/candidates",
     element: <AdminCandidates />,
+  },
+  {
+    path: "/admin/nominee",
+    element: <AdminNominee />,
   },
   {
     path: "*",
