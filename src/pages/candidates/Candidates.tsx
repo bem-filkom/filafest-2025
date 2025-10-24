@@ -69,26 +69,30 @@ export default function Candidates() {
         </motion.header>
 
         <main className="max-w-6xl mx-auto mb-20 px-6">
-          <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {data.nominees.map((item, index) => (
-              <motion.div key={index} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}>
-                <Card className={`relative ${item.is_voted ? "border-orange-500" : ""}`}>
-                  {item.is_voted && <Badge className="absolute top-1 right-1 z-10">Terpilih</Badge>}
-                  <CardContent>
-                    <div className="w-full aspect-square mb-2">
-                      <Avatar className="w-full h-full rounded-lg border">
-                        <AvatarImage src={item.candidate.image_url} alt="Foto Kandidat" className="object-cover" />
-                        <AvatarFallback className="rounded-none">{item.candidate.name.charAt(0).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                    </div>
+          {data.nominees.length === 0 ? (
+            <div className="text-center py-20 text-muted-foreground text-lg italic">Yah, kandidat masih belum ada.</div>
+          ) : (
+            <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+              {data.nominees.map((item, index) => (
+                <motion.div key={index} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}>
+                  <Card className={`relative ${item.is_voted ? "border-orange-500" : ""}`}>
+                    {item.is_voted && <Badge className="absolute top-1 right-1 z-10">Terpilih</Badge>}
+                    <CardContent>
+                      <div className="w-full aspect-square mb-2">
+                        <Avatar className="w-full h-full rounded-lg border">
+                          <AvatarImage src={item.candidate.image_url} alt="Foto Kandidat" className="object-cover" />
+                          <AvatarFallback className="rounded-none">{item.candidate.name.charAt(0).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                      </div>
 
-                    <h1 className="mb-2 text-sm italic font-semibold">{item.candidate.name}</h1>
-                    <DialogDetailCandidate candidate={item.candidate} nomination={data.nomination} nomineeId={item.id} isVoted={item.is_voted} hasVoted={hasVoted} />
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                      <h1 className="mb-2 text-sm italic font-semibold">{item.candidate.name}</h1>
+                      <DialogDetailCandidate candidate={item.candidate} nomination={data.nomination} nomineeId={item.id} isVoted={item.is_voted} hasVoted={hasVoted} />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           <a href="/categories">
             <div className="group relative py-16 sm:py-20 px-6 sm:px-10 cursor-pointer border-b-2 border-b-white border-r border-r-white bg-gradient-to-br from-orange-800 via-orange-700 to-amber-500 rounded-3xl shadow-2xl overflow-hidden">
