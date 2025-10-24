@@ -1,4 +1,5 @@
-import MainLayout from "@/components/share/MainLayout";
+// src/routes/index.tsx (MODIFIKASI)
+
 import Admin from "@/pages/admin/Admin";
 import AdminCandidates from "@/pages/admin/candidates/AdminCandidates";
 import AdminCategories from "@/pages/admin/categories/AdminCategories";
@@ -10,67 +11,38 @@ import Candidates from "@/pages/candidates/Candidates";
 import Categories from "@/pages/categories/Categories";
 import Landing from "@/pages/landing/Landing";
 import NotFound from "@/pages/not-found/NotFound";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Landing />,
-  },
-  {
-    path: "/login",
-    element: (
-      <MainLayout>
-        <Login />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/categories",
-    element: <Categories />,
-  },
-  {
-    path: "/categories/:slug",
-    element: <Candidates />,
-  },
-  {
-    path: "/awarding",
-    element: <Awarding />,
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-  },
-  {
-    path: "/admin/categories",
-    element: <AdminCategories />,
-  },
-  {
-    path: "/admin/nominations",
-    element: <AdminNominations />,
-  },
-  {
-    path: "/admin/candidates",
-    element: <AdminCandidates />,
-  },
-  {
-    path: "/admin/nominee",
-    element: <AdminNominee />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-  //   {
-  //     path: "/voting",
-  //     element: (
-  //       <ProtectedRoute>
-  //         <VotingPage />
-  //       </ProtectedRoute>
-  //     ),
-  //   },
-]);
+import { Routes, Route } from "react-router-dom";
+import AdminRoute from "./AdminRoute";
+
+// 1. Import AdminRoute yang baru Anda buat
 
 export default function AppRouter() {
-  return <RouterProvider router={router} />;
+  return (
+    <Routes>
+      {/* Rute Publik */}
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/categories/:slug" element={<Candidates />} />
+      <Route path="/awarding" element={<Awarding />} />
+
+      {/* 2. Rute Admin yang Dilindungi 
+        Semua rute admin sekarang menjadi 'children' dari AdminRoute.
+      */}
+      <Route path="/admin" element={<AdminRoute />}>
+        {/* Rute 'index' akan me-render /admin */}
+        <Route index element={<Admin />} />
+
+        {/* Rute anak tidak perlu /admin lagi di path-nya */}
+        <Route path="categories" element={<AdminCategories />} />
+        <Route path="nominations" element={<AdminNominations />} />
+        <Route path="candidates" element={<AdminCandidates />} />
+        <Route path="nominee" element={<AdminNominee />} />
+      </Route>
+
+      {/* Rute Not Found */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }

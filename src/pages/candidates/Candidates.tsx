@@ -11,14 +11,28 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "@/hooks/use-fetch";
 import Error from "@/components/share/Error";
 import Loading from "@/components/share/Loading";
+import type { NomineesResponse } from "@/types/nominee.type";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useEffect, useState } from "react";
 import type { Nomination } from "@/types/nomination.type";
 
 export default function Candidates() {
   const { slug } = useParams();
 
-  const { data, error, loading } = useFetch<Nomination>("/nominations/" + slug);
+  const { data: dataNomination } = useFetch<Nomination>("/nominations/" + slug);
 
-  if (loading) <Loading />;
+  const { data, error, loading } = useFetch<NomineesResponse>("/nominees?nomination_id=" + slug);
+
+  const [hasVoted, setHasVoted] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      const voted = data.nominees.some((nominee) => nominee.is_voted === true);
+      setHasVoted(voted);
+    }
+  }, [data]);
+
+  if (loading) return <Loading />;
 
   if (error) {
     return <Error />;
@@ -49,20 +63,27 @@ export default function Candidates() {
           </div>
           <div className="max-w-4xl mx-auto px-6 text-center">
             <Badge className="mb-5">Nominasi</Badge>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight !font-serif italic">{data.name}</h1>
-            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">{data.description}</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight !font-serif italic">{data.nomination.name}</h1>
+            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">{dataNomination?.description}</p>
           </div>
         </motion.header>
 
         <main className="max-w-6xl mx-auto mb-20 px-6">
           <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {Array.from({ length: 10 }).map((_, index) => (
+            {data.nominees.map((item, index) => (
               <motion.div key={index} initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}>
-                <Card>
+                <Card className={`relative ${item.is_voted ? "border-orange-500" : ""}`}>
+                  {item.is_voted && <Badge className="absolute top-1 right-1 z-10">Terpilih</Badge>}
                   <CardContent>
-                    <img src={"https://umj.ac.id/storage/2024/10/parb.jpg"} className="aspect-square border mb-2 rounded-lg object-cover w-full" />
-                    <h1 className="mb-2 text-sm italic font-semibold">Ir. Bp. Numerouno S.Kom. P.hd</h1>
-                    <DialogDetailCandidate />
+                    <div className="w-full aspect-square mb-2">
+                      <Avatar className="w-full h-full rounded-lg border">
+                        <AvatarImage src={item.candidate.image_url} alt="Foto Kandidat" className="object-cover" />
+                        <AvatarFallback className="rounded-none">{item.candidate.name.charAt(0).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                    </div>
+
+                    <h1 className="mb-2 text-sm italic font-semibold">{item.candidate.name}</h1>
+                    <DialogDetailCandidate candidate={item.candidate} nomination={data.nomination} nomineeId={item.id} isVoted={item.is_voted} hasVoted={hasVoted} />
                   </CardContent>
                 </Card>
               </motion.div>

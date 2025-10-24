@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import LightRays from "../share/LightRays";
 import { ArrowUpRight } from "lucide-react";
 import MarqueeImage from "../share/MarqueeImage";
+import { useAuth } from "@/hooks/use-auth";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement>;
 
@@ -26,6 +28,8 @@ const itemVariants: MotionProps["variants"] = {
 };
 
 export function HeroSection({ ...props }: HeroSectionProps) {
+  const { isAuthenticated } = useAuth();
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden" {...props}>
       {/* Overlay Layers */}
@@ -66,10 +70,17 @@ export function HeroSection({ ...props }: HeroSectionProps) {
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <motion.div whileTap={{ scale: 0.95 }}>
-            <Button size="lg" className="!px-12 py-3 rounded-full text-base font-medium shadow-lg bg-gradient-to-r from-[#241084] via-[#00309B] to-[#1581FF]">
-              Vote Now!
-              <ArrowUpRight className="ml-2 h-5 w-5" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href={isAuthenticated ? "/categories" : "/login"}>
+                  <Button size="lg" className="!px-12 py-3 rounded-full text-base font-medium shadow-lg bg-gradient-to-r from-[#241084] via-[#00309B] to-[#1581FF]">
+                    Vote Now!
+                    <ArrowUpRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>{isAuthenticated ? <p>Lihat nominasi</p> : <p>Login dulu ya!</p>}</TooltipContent>
+            </Tooltip>
           </motion.div>
         </motion.div>
       </motion.div>

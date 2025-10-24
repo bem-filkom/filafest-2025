@@ -5,7 +5,6 @@ const apiService = {
   async get(endpoint: string) {
     try {
       const response = await api.get(endpoint);
-      console.log(response);
 
       return { data: response.data, error: null };
     } catch (error: any) {
@@ -17,12 +16,14 @@ const apiService = {
   },
 };
 
-export const useFetch = <T>(endpoint: string) => {
+export const useFetch = <T>(endpoint: string | null) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!endpoint) return;
+
     const fetchData = async () => {
       setLoading(true);
       const { data, error } = await apiService.get(endpoint);

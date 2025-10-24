@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-7xl px-4">
@@ -31,7 +31,7 @@ export function Navbar() {
               <a href="/awarding" className="nav-link">
                 Awarding
               </a>
-              {isLoggedIn ? (
+              {isAuthenticated ? (
                 <Button variant="default" size="sm" onClick={logout} className="ml-4 bg-orange-600 hover:bg-orange-800 border-orange-600 backdrop-blur-sm text-white">
                   Logout
                   <LogOut className="ml-1 h-4 w-4" />
@@ -69,7 +69,7 @@ export function Navbar() {
           <a href="/awarding" className="mobile-link">
             Awarding
           </a>
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <Button variant="outline" size="sm" onClick={logout} className="w-full bg-orange-600 hover:bg-orange-800 border-orange-600 backdrop-blur-sm text-white">
               Logout
             </Button>

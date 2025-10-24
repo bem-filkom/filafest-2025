@@ -4,12 +4,15 @@ import "./index.css";
 import AppRouter from "./routes/index.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { Toaster } from "sonner";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <AppRouter />
-      <Toaster theme="dark" />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRouter />
+        <Toaster theme="dark" />
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>
 );

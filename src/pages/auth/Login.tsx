@@ -17,12 +17,30 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      if (!email.trim() && !password.trim()) {
+        toast.error("Email dan password tidak boleh kosong.");
+      } else if (!email.trim()) {
+        toast.error("Email tidak boleh kosong.");
+      } else {
+        toast.error("Password tidak boleh kosong.");
+      }
+      return;
+    }
     try {
       await login(email, password);
       toast.success("Login berhasil.");
       navigate("/categories");
     } catch (err: any) {
+      console.log(err);
+
       toast.error(err.message || "Login gagal.");
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleLogin();
     }
   };
 
@@ -54,11 +72,19 @@ export default function Login() {
               <div className="space-y-5">
                 <div className="space-y-2">
                   <Label>Email UB</Label>
-                  <Input className="border-border outline" placeholder="email@student.ub.ac.id" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Input className="border-border outline" placeholder="email@student.ub.ac.id" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={handleKeyDown} required />
                 </div>
                 <div className="space-y-2">
                   <Label>Kata Sandi</Label>
-                  <Input className="border-border outline" type="password" placeholder="Masukkan password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <Input
+                    className="border-border outline"
+                    type="password"
+                    placeholder="Masukkan password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    required={true}
+                  />
                 </div>
                 <p className="my-3 italic text-center">
                   Pakai akun <strong>SIAM</strong> ya!

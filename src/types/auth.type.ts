@@ -1,13 +1,13 @@
 export interface User {
-  userId: string;
-  token: string;
+  id: string;
+  email: string;
+  role: string;
 }
 
 export interface AuthContextType {
   user: User | null;
-  isLoggedIn: boolean;
-  loading: boolean;
-  error: string | null;
+  isAuthenticated: boolean;
+  loading: boolean; // Penting untuk protected route
   login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
+  logout: () => void;
 }

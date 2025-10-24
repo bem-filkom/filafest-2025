@@ -18,8 +18,22 @@ export const login = async ({ email, password }: { email: string; password: stri
       token: data?.token,
     };
   } catch (error: any) {
-    console.error("Login failed:", error.response?.data || error.message);
-    throw new Error(error.response?.data?.message || "Login failed");
+    if (error.response?.data) {
+      const { message, data } = error.response.data;
+
+      if (Array.isArray(data?.errors)) {
+        const messages = data.errors.map((err: any) => `${err.field}: ${err.message}`).join("\n");
+        throw new Error(messages);
+      }
+
+      if (typeof data?.errors === "string") {
+        throw new Error(data.errors);
+      }
+
+      throw new Error(message || "Terjadi kesalahan saat login");
+    }
+
+    throw new Error("Tidak dapat terhubung ke server. Coba lagi nanti.");
   }
 };
 
@@ -31,7 +45,6 @@ export const logout = async () => {
 
     return { message: "User Logged Out Successfully" };
   } catch (error: any) {
-    console.error("Logout failed:", error.response?.data || error.message);
-    throw new Error(error.response?.data?.message || "Logout failed");
+    throw new Error(error || "Logout failed");
   }
 };
