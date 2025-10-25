@@ -6,30 +6,24 @@ import maskotVote from "@/assets/maskots/vote.png";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { ArrowUpRightIcon } from "lucide-react";
+import type { NomineesResponse } from "@/types/nominee.type";
 
-const chartData = [
-  { label: "Profile A", name: "John Doe", value: 275 },
-  { label: "Profile B", name: "Jane Smith", value: 200 },
-  { label: "Profile C", name: "Michael Tan", value: 187 },
-  { label: "Profile D", name: "Siti Rahma", value: 173 },
-  { label: "Profile E", name: "Rudi Hartono", value: 90 },
-];
-
-export default function ChartDashboard() {
-  const maxValue = Math.max(...chartData.map((d) => d.value));
+export default function ChartDashboard({ responseNominee }: { responseNominee: NomineesResponse }) {
+  const maxValue = responseNominee.nominees.length;
 
   return (
     <Card className="">
       <CardHeader className="border-border border-b">
         <CardDescription className="mb-2">
-          <Badge>Dosen</Badge>
+          <Badge>{responseNominee.category.name}</Badge>
         </CardDescription>
-        <CardTitle>Best Inovative Teacher</CardTitle>
+        <CardTitle>{responseNominee.nomination.name}</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-2">
-        {chartData.map((item, i) => {
-          const widthPercent = (item.value / maxValue) * 100;
+        {responseNominee.nominees.map((item, i) => {
+          const widthPercent = (item.total_votes / maxValue) * 100;
+          console.log(widthPercent);
 
           return (
             <div key={i} className="flex flex-col">
@@ -47,12 +41,12 @@ export default function ChartDashboard() {
                   />
                 </div>
 
-                <div className="w-12 text-xs text-muted-foreground text-right font-medium">{item.value}</div>
+                <div className="w-12 text-xs text-muted-foreground text-right font-medium">{item.total_votes}</div>
               </div>
 
               <div className="flex items-center gap-3 ">
                 <div className="w-12" />
-                <div className="text-xs text-muted-foreground/80">{item.name}</div>
+                <div className="text-xs text-muted-foreground/80">{item.candidate.name}</div>
               </div>
             </div>
           );
