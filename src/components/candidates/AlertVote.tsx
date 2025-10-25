@@ -19,7 +19,9 @@ export default function AlertVote({ candidate, nomination, nomineeId }: { candid
       await api.post("/votes", {
         nominee_id: nomineeId,
       });
-      toast.success(`Vote Anda untuk ${candidate.name} telah disimpan!`);
+      toast.success(`Vote Anda untuk ${candidate.name} telah disimpan!`, {
+        position: "top-right",
+      });
       toast.info("Pilih nominasi lain yuk!");
       navigate("/categories");
       setOpen(false); // Tutup dialog setelah berhasil
