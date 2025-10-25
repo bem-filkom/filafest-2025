@@ -56,7 +56,7 @@ export default function Candidates() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Best Inspiring Lecture</BreadcrumbPage>
+                  <BreadcrumbPage>{data.nomination.name}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
