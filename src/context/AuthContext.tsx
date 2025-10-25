@@ -55,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // 3. Bungkus fungsi login dari service Anda
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<User> => {
     setLoading(true);
     try {
       // Panggil service login Anda
@@ -64,13 +64,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (token) {
         // Jika login sukses (token ada), decode dan simpan user state
         const decodedToken = jwtDecode<DecodedToken>(token);
-        setUser({
+        const newUser: User = {
           id: decodedToken.sub,
           email: decodedToken.email,
           role: decodedToken.role,
-        });
+        };
+        setUser(newUser);
         setIsAuthenticated(true);
+        return newUser;
       }
+
+      throw new Error("Login berhasil, namun ada beberapa kendala. Coba logout!");
     } catch (error) {
       // Jika login gagal, pastikan state bersih
       setUser(null);

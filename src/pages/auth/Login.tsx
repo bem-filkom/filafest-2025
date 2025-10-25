@@ -28,9 +28,14 @@ export default function Login() {
       return;
     }
     try {
-      await login(email, password);
+      const loggedInUser = await login(email, password);
       toast.success("Login berhasil.");
-      navigate("/categories");
+      console.log(loggedInUser);
+      if (loggedInUser.role == "ADMIN") {
+        navigate("/admin");
+      } else {
+        navigate("/categories");
+      }
     } catch (err: any) {
       console.log(err);
 
