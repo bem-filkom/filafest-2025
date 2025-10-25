@@ -41,6 +41,7 @@ export const login = async ({ email, password }: { email: string; password: stri
 export const logout = async () => {
   try {
     localStorage.removeItem(config.keyToken);
+    localStorage.clear();
 
     delete api.defaults.headers.common["Authorization"];
 
