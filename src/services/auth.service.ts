@@ -1,3 +1,4 @@
+import config from "@/config";
 import { api } from "@/config/axios";
 
 export const login = async ({ email, password }: { email: string; password: string }) => {
@@ -7,7 +8,7 @@ export const login = async ({ email, password }: { email: string; password: stri
 
     // simpan token ke localStorage
     if (data?.token) {
-      localStorage.setItem("token", data.token);
+      localStorage.setItem(config.keyToken, data.token);
       // set token ke header default axios
       api.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
     }

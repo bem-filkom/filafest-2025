@@ -12,14 +12,11 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    if (typeof window === "undefined") {
-      console.log("🚨 Interceptor berjalan di SERVER");
-    } else {
-      const token = localStorage.getItem(configGlobal.keyToken);
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+    const token = localStorage.getItem(configGlobal.keyToken);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)

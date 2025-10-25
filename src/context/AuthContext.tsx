@@ -7,6 +7,7 @@ import { api } from "@/config/axios";
 import type { User } from "@/types/auth.type";
 import { AuthContext } from "@/hooks/use-auth";
 import { useNavigate } from "react-router-dom";
+import config from "@/config";
 
 // 1. Tentukan interface berdasarkan contoh token Anda
 interface DecodedToken {
@@ -25,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 2. Cek token di localStorage saat aplikasi pertama kali dimuat
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(config.keyToken);
     if (token) {
       try {
         const decodedToken = jwtDecode<DecodedToken>(token);
